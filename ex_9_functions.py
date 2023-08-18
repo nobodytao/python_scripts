@@ -8,3 +8,4 @@ def summ(a,b):
     return a+b, str(a)+str(b)
 
 print(summ(1,2))
+print(summ(b=1,a=2))
