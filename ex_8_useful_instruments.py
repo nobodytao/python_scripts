@@ -1,3 +1,3 @@
 FIO="Test Testing Tester"
 
-print (f"FIO: {FIO}")
+print (f"FIO: {str(FIO+', hello!')}")
