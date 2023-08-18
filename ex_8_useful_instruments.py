@@ -1,3 +1,6 @@
+from pprint import pprint
+from rich import inspect
+
 FIO="Test Testing Tester"
 
 print (f"FIO: {str(FIO+', hello!')}")
@@ -12,6 +15,8 @@ one,two,_,_,five,six,seven = listofvalues
 
 print (f'{five:5}{seven:7}{two:2}')
 
-one,two,_,*others = listofvalues
+one,two,_,*others,seven = listofvalues
 
 print(others)
+
+pprint(locals())
