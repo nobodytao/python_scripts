@@ -11,3 +11,7 @@ listofvalues=['1','2','three','four','five','six','7']
 one,two,_,_,five,six,seven = listofvalues
 
 print (f'{five:5}{seven:7}{two:2}')
+
+one,two,_,*others = listofvalues
+
+print(others)
