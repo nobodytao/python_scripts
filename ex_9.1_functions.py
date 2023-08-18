@@ -12,6 +12,12 @@ dict_arg={'FastEthernet0/12': 10,
      'FastEthernet0/14': 11,
      'FastEthernet0/16': 17}
 
+dict_arg2 = {
+    "FastEthernet0/03": 100,
+    "FastEthernet0/07": 101,
+    "FastEthernet0/09": 107,
+}
+
 def accesslist(dictionary_with_interfaces,template_for_dictionary):
     access_list = []
     for dict_key in dictionary_with_interfaces.keys():
@@ -23,4 +29,4 @@ def accesslist(dictionary_with_interfaces,template_for_dictionary):
                 access_list.append(acc_item)
     return access_list
 
-print(accesslist(dict_arg,access_mode_template))
+print(accesslist(dict_arg2,access_mode_template))
