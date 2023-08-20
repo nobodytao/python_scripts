@@ -30,12 +30,12 @@ def accesslist(dictionary_with_interfaces,template_for_dictionary,template_for_p
         access_list.append("interface "+dict_key)
         for acc_item in template_for_dictionary:
             if acc_item.startswith('switchport access vlan'):
-                access_list.append(acc_item+" "+str(dictionary_with_interfaces[dict_key]))
+                access_list.append(acc_item.strip()+" "+str(dictionary_with_interfaces[dict_key]))
             else: 
-                access_list.append(acc_item)
+                access_list.append(acc_item.strip())
         if  template_for_port:
             for port_item in template_for_port:
-                access_list.append(port_item)
+                access_list.append(port_item.strip())
             
     return access_list
 
