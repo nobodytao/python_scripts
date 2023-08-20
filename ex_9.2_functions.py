@@ -10,14 +10,15 @@ trunk_config = {
 }
 
 def generate_trunk_config(intf_vlan_mapping,trunk_template):
-    resultlist=[]
+    resultdict={}
     for intf_vlan in intf_vlan_mapping:
-        resultlist.append('interface ' + intf_vlan)
+        resultlist=[]
         for item_template in trunk_template:
             if item_template.startswith('switchport trunk allowed vlan'):
                 resultlist.append(item_template + " " + str(intf_vlan_mapping[intf_vlan]).strip("[]"))
             else:
                 resultlist.append(item_template)
-    print (resultlist)
+        resultdict[intf_vlan] = resultlist
+    return resultdict
 
-generate_trunk_config(trunk_config,trunk_mode_template)
+print(generate_trunk_config(trunk_config,trunk_mode_template))
