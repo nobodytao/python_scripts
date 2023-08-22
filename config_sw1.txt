@@ -22,7 +22,7 @@ hostname sw1
 interface FastEthernet0/0
  switchport mode access
  switchport access vlan 10
-!
+TEST TEST
 interface FastEthernet0/1
  switchport trunk encapsulation dot1q
  switchport trunk allowed vlan 100,200
