@@ -23,7 +23,6 @@ hostname sw1
 interface FastEthernet0/0
  switchport mode access
  switchport access vlan 10
- duplex auto
 !
 interface FastEthernet0/1
  switchport trunk encapsulation dot1q
@@ -45,7 +44,6 @@ interface FastEthernet0/3
 interface FastEthernet1/0
  switchport mode access
  switchport access vlan 20
- duplex auto
 !
 interface FastEthernet1/1
  switchport mode access
