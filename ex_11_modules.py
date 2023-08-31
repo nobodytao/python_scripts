@@ -29,7 +29,13 @@ def parse_cdp_neighbors(command_output):
 
     return (result_dict)    
     
-        
+
+infiles = [
+    "sh_cdp_n_sw1.txt",
+    "sh_cdp_n_r1.txt",
+    "sh_cdp_n_r2.txt",
+    "sh_cdp_n_r3.txt",
+    ]      
         
 if __name__ == "__main__":
         with open("sh_cdp_n_sw1.txt") as f:
