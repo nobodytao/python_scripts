@@ -11,15 +11,12 @@ def parse_cdp_neighbors(command_output):
     tuple_val = ()
 
     strings = command_output.split('\n')
-    for onestr in strings:
+    for position, onestr in enumerate(strings):
         if (">") in onestr:
              dict_key_name = onestr.split('>')[0] 
-             break
-        
-    for position, onestr in enumerate(strings):
         if ("Device ID") in onestr:
              break
-        
+                
     for item_list in range(position+1): strings.pop(0)
 
     for onestr in strings:
