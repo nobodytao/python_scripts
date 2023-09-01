@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import pyttsx3 
 from random import randrange 
 
@@ -20,7 +18,7 @@ list_of_questions=[
 engine = pyttsx3.init()
 
 while 1 > 0: 
-    random_question_index = randrange(len(list_of_questions)-1)
+    random_question_index = randrange(len(list_of_questions))
     engine.say(list_of_questions[random_question_index])
     engine.runAndWait()
 
