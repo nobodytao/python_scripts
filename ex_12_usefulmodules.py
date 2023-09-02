@@ -73,4 +73,7 @@ list_of_dicts=[{'IP': '15.0.15.1',
 print(tabulate(list_of_dicts, headers='keys'))
 print(tabulate(list_of_dicts, headers='keys', tablefmt="grid"))
 
+with open('table_of_IPs.html','w') as html_file:
+     html_file.writelines(tabulate(list_of_dicts, headers='keys', tablefmt='html'))
 
+print(tabulate(list_of_dicts, headers='keys', tablefmt='pipe', stralign='center'))
