@@ -15,3 +15,13 @@ print(result.stderr)
 
 print(os.path.abspath("python_scripts"))
 
+ipv4 = ipaddress.ip_address('10.0.1.1')
+print(ipv4)
+
+subnet1 = ipaddress.ip_network('80.0.1.0/28')
+print(subnet1.broadcast_address, subnet1.network_address, subnet1.netmask, subnet1.num_addresses, subnet1.prefixlen)
+print(list(subnet1.hosts()))
+
+for ip in subnet1:
+    print(ip)
+
