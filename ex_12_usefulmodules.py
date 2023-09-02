@@ -1,4 +1,5 @@
 import subprocess, os, ipaddress
+from tabulate import tabulate
 
 #standard input/output stream
 result = subprocess.run(['ls', '-ls'], stdout=subprocess.PIPE)
@@ -24,4 +25,52 @@ print(list(subnet1.hosts()))
 
 for ip in subnet1:
     print(ip)
+
+IP1 = '10.0.1.1/24'
+IP2 = '10.0.1.0/24'
+
+def check_if_ip_is_network(ip_address):
+        try:
+            ipaddress.ip_network(ip_address)
+            return True
+        except ValueError:
+            return False
+
+print(check_if_ip_is_network(IP1))
+
+#Tabulate module
+sh_ip_int_br = [('FastEthernet0/0', '15.0.15.1', 'up', 'up'),
+     ('FastEthernet0/1', '10.0.12.1', 'up', 'up'),
+     ('FastEthernet0/2', '10.0.13.1', 'up', 'up'),
+     ('Loopback0', '10.1.1.1', 'up', 'up'),
+     ('Loopback100', '100.0.0.1', 'up', 'up')]
+
+columns = ['Interface', 'IP', 'Status', 'Protocol']
+
+print(tabulate(sh_ip_int_br, headers=columns))
+
+list_of_dicts=[{'IP': '15.0.15.1',
+  'Interface': 'FastEthernet0/0',
+  'Protocol': 'up',
+  'Status': 'up'},
+ {'IP': '10.0.12.1',
+  'Interface': 'FastEthernet0/1',
+  'Protocol': 'up',
+  'Status': 'up'},
+ {'IP': '10.0.13.1',
+  'Interface': 'FastEthernet0/2',
+  'Protocol': 'up',
+  'Status': 'up'},
+ {'IP': '10.1.1.1',
+  'Interface': 'Loopback0',
+  'Protocol': 'up',
+  'Status': 'up'},
+ {'IP': '100.0.0.1',
+  'Interface': 'Loopback100',
+  'Protocol': 'up',
+  'Status': 'up'}]
+
+print(tabulate(list_of_dicts, headers='keys'))
+print(tabulate(list_of_dicts, headers='keys', tablefmt="grid"))
+
 
