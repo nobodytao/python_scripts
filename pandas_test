@@ -1,0 +1,11 @@
+import seaborn 
+import pandas
+import matplotlib.pyplot as plt
+
+numbers = pandas.Series([1,2,3,4,5,6,7,8,9,10])
+
+strengths = pandas.Series([10,55,11,2,4,8,34,5,1,0])
+
+seaborn.barplot(x = numbers, y = strengths)
+
+plt.show()
