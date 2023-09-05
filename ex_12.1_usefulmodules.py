@@ -4,16 +4,31 @@ def convert_ranges_to_ip_list(list_ranges):
     '''
     This function converts a list of ranges into a list of IPs
     '''
-    pass
+    list_of_ips = []
+    for one_list in list_ranges:
+        position = one_list.find("-")
+        start_of_range = None
+        end_of_range = None
+        if (position > 0):
+            splitted_range = one_list.split('-')
+            start_of_range = splitted_range[0].split('.')
+            end_of_range = splitted_range[1].split('.')
+            for addr in range(int(start_of_range[len(start_of_range)-1]),int(end_of_range[len(end_of_range)-1])+1):
+                list_of_ips.append("{}.{}.{}.{}".format(start_of_range[0],start_of_range[1],start_of_range[2],addr) )
+        else:
+            list_of_ips.append(one_list)
+    return list_of_ips
 
-def ping_ip_addresses(list_ips):
+def ping_ip_addresses(list_ranges):
     '''
     This function determines whether the IP is alive or unreachable
     '''
+    list_ips = convert_ranges_to_ip_list(list_ranges)
+
     list_alive=[]
     list_unreach=[]
     for ip_addr in list_ips:
-        reply = subprocess.run(['ping', '-c', '3','-n', ip_addr])
+        reply = subprocess.run(['ping', '-c', '1','-n', ip_addr])
 
         if reply.returncode == 0:
             list_alive.append(ip_addr)
@@ -21,7 +36,6 @@ def ping_ip_addresses(list_ips):
             list_unreach.append(ip_addr)
     return list_alive, list_unreach
 
-list_of_ranges = ['127.0.0.1','10.10.0.1','10.10.2.4','127.0.0.1','192.168.212.3']
+list_of_ranges = ['127.0.0.1','10.10.0.1-3','10.10.2.45-10.10.2.48','127.0.0.1-127.0.0.3','192.168.212.3']
 
-#print(ping_ip_addresses(list_of_ranges)
-convert_ranges_to_ip_list(list_of_ranges)
+print(ping_ip_addresses(list_of_ranges))
