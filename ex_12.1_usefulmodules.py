@@ -36,6 +36,6 @@ def ping_ip_addresses(list_ranges):
             list_unreach.append(ip_addr)
     return list_alive, list_unreach
 
-list_of_ranges = ['127.0.0.1','10.10.0.1-3','10.10.2.45-10.10.2.48','127.0.0.1-127.0.0.3','192.168.212.3']
+list_of_ranges = ['127.0.0.1','77.88.55.242-77.88.55.252','127.0.0.1-127.0.0.15','10.10.212.3','10.10.0.1','77.88.55.230-2']
 
 print(ping_ip_addresses(list_of_ranges))
