@@ -30,7 +30,6 @@ def transform_topology(yaml_file):
     Makes a dictionary from the yaml-file 
     with connections between devices
     '''
-
     topology_from_file = {}
     with open(yaml_file, 'r') as save_file:
         result_dict = dict()
