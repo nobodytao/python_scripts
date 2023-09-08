@@ -1,62 +1,66 @@
-import locale, re, csv, yaml, draw_network_graph, pprint
+import csv, datetime
 
-def generate_topology_from_cdp(list_files, save_filename):
-    '''
-    Reads connections between devices 
-    from files with output from command show cdp neighbors
-    '''
-    with open(save_filename, 'w') as save_file:
-        result_dict = {}
-        for one_file in list_files:
-            device_dict_port = {}
-            with open(one_file, 'r') as settings_file:
-                device_name = ''
-                for one_line in settings_file:
-                    device_dict = {}
-                    match_device = re.search(r'(^[A-Za-z0-9]+)>', one_line)
-                    if match_device:
-                        device_name = match_device.group(1)
-                    match_settings = re.search(r'([A-Za-z0-9]+) +(\S+ \d+/\d+) +\S+ +R? +S? +I?+ +[A-Za-z0-9-]+ +(\S+ \d+/\d+)', one_line)
-                    if match_settings:
-                        device_dict[match_settings.group(1)] = match_settings.group(3)
-                        device_dict_port[match_settings.group(2)] = device_dict         
-            result_dict[device_name] = device_dict_port
-        yaml.dump(result_dict, save_file)
-    return result_dict
+def convert_str_to_datetime(datetime_str):
+    """
+    Converts a string in the format 11/10/2019 14:05 into a datetime object.
+    """
+    return datetime.datetime.strptime(datetime_str, "%d/%m/%Y %H:%M")
 
+def convert_datetime_to_str(datetime_obj):
+    """
+    Converts a datetime in the format 11/10/2019 14:05 into a string.
+    """
+    return datetime.datetime.strftime(datetime_obj, "%d/%m/%Y %H:%M")
 
-def transform_topology(yaml_file):
+def write_last_log_to_csv(source_log, output):
     '''
-    Makes a dictionary from the yaml-file 
-    with connections between devices
+    The function does not return anything.
+    The write_last_log_to_csv function processes the csv file mail_log.csv. 
+    The mail_log.csv file contains logs of username changes. 
+    At the same time, the user cannot change the email, only the name.
+    The write_last_log_to_csv function should select only the most recent entries 
+    for each user from the mail_log.csv file and write them to another csv file. 
+    In the output file, the first line should be the column headings, the same as in the source_log file.
+    For some users, there is only one entry, and then only it should be written to the final file.
     '''
-    topology_from_file = {}
-    with open(yaml_file, 'r') as save_file:
-        result_dict = dict()
-        result_list = []
-        topology_from_file = yaml.safe_load(save_file)
-        for key_dict in topology_from_file:
-            inner_1lvl_dict = topology_from_file[key_dict]
-            for key_inner_dict in inner_1lvl_dict:
-                inner_2lvl_dict = inner_1lvl_dict[key_inner_dict] 
-                for key_2lvl_inner_dict, value in inner_2lvl_dict.items():
-                    tuple2lvl = (key_2lvl_inner_dict, value)
-                    tuple1lvl = (key_dict, key_inner_dict)
-                    result_list.append(sorted((tuple2lvl, tuple1lvl)))
-        result_list = (sorted(result_list))
-        for item_list in result_list:
-            result_dict[item_list[0]] = item_list[1]
+    with open(source_log, 'r') as source_f:
+        dict_from_csv = csv.DictReader(source_f)
+        result_users_list = []
 
-    return result_dict
+        for one_dictionary in dict_from_csv:
+            one_user = [one_dictionary['Email'], one_dictionary['Name'], convert_str_to_datetime(one_dictionary['Last Changed'])]
+            result_users_list.append(one_user)
+        result_users_list = sorted(result_users_list)
+
+        user_mail = ''
+        user_name = ''
+        user_date = ''
+
+        list_to_csv = []
+        for one_list_user in result_users_list:
+            if (one_list_user[0] == user_mail):
+                #Duplicate
+                if (one_list_user[2] > user_date):
+                    #Duplicate. And date bigger
+                    user_name = one_list_user[1]
+                    user_date = one_list_user[2]
+                    list_to_csv.pop(-1)
+                    list_to_csv.append([user_name, user_mail, convert_datetime_to_str(user_date)])        
+            else:
+                user_mail = one_list_user[0]
+                user_name = one_list_user[1]
+                user_date = one_list_user[2]
+                list_to_csv.append([user_name, user_mail, convert_datetime_to_str(user_date)])
+
+        with open(output, 'w') as out_file:
+            writer = csv.writer(out_file)
+            writer.writerows(list_to_csv)
+
 
 '''
 MAIN
 '''
-list_of_files = ['sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt', 'sh_cdp_n_r4.txt', 'sh_cdp_n_r5.txt', 'sh_cdp_n_r6.txt']
-save_to_filename = 'sh_cdp_neighbor.yaml'
+source_file = 'mail_log.csv'
+output_file = 'mail_log_wo_duplicates.csv'
+write_last_log_to_csv(source_file, output_file)
 
-generate_topology_from_cdp(list_of_files, save_to_filename)
-
-dict_for_draw = transform_topology(save_to_filename)
-
-draw_network_graph.draw_topology(dict_for_draw)
