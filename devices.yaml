@@ -5,3 +5,10 @@
   secret: Luba
   timeout: 10
   #fast_cli: true
+- device_type: cisco_ios
+  host: 192.168.178.2
+  username: Luba
+  password: LubaLubaLuba
+  secret: Luba
+  timeout: 10
+  #fast_cli: true

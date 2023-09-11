@@ -1,0 +1,10 @@
+PING 192.168.178.3 (192.168.178.3) 56(84) bytes of data.
+64 bytes from 192.168.178.3: icmp_seq=1 ttl=254 time=15.6 ms
+64 bytes from 192.168.178.3: icmp_seq=2 ttl=254 time=13.6 ms
+64 bytes from 192.168.178.3: icmp_seq=3 ttl=254 time=15.4 ms
+64 bytes from 192.168.178.3: icmp_seq=4 ttl=254 time=14.2 ms
+64 bytes from 192.168.178.3: icmp_seq=5 ttl=254 time=18.7 ms
+
+--- 192.168.178.3 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 13.611/15.502/18.664/1.754 ms
