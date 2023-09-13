@@ -1,3 +1,3 @@
-import sqlite3
+import sqlite3, litecli
 
-sqlite3 "testDB.db"
+connection = sqlite3.connect('testDB.db')
