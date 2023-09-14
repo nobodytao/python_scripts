@@ -1,6 +1,41 @@
+#!/usr/bin/env python3
+
 import sqlite3, os, create_db, textfsm, re
 
+def update_table_dhcp(filewithdata, templatefromfile, dbname):
+    '''
+    Updating table dhcp with new data fron file 'sw1_dhcp_new_info.txt'
+    '''
+    conn = sqlite3.connect(dbname)  
+    cur = conn.cursor()
+    result = []
+    with open(templatefromfile, 'r') as templ:
+        template_dhcp = textfsm.TextFSM(templ)
+    with open(filewithdata, 'r') as dhcp:
+            device_name = re.search(r'(\S+)_dhcp', dhcp.name).group(1)
+            print("From file", dhcp.name)
+            data_dhcp = dhcp.read()
+            result = template_dhcp.ParseText(data_dhcp)
+            for one_dhcp_device in result:
+                one_dhcp_device = tuple(one_dhcp_device) + (device_name,) + (True,)
+                print("adding row:", one_dhcp_device, "INTO table 'dhcp'")
+                try:
+                    query = "REPLACE into dhcp values (?,?,?,?,?,?)"
+                    cur.execute(query, one_dhcp_device)
+                    conn.commit()
+                except sqlite3.IntegrityError as err:
+                    print('Something wrong: ', err)
+            result.clear()
+
+
 def filling_tables(switchfile, dhcpfiles, dbname):
+    '''
+    Filling new tables 'dhcp' and 'switches' from files:
+    'sw1_dhcp_snooping.txt', 
+    'sw2_dhcp_snooping.txt', 
+    'sw3_dhcp_snooping.txt',
+    switches.yml
+    '''
     conn = sqlite3.connect(dbname)  
     cur = conn.cursor()
     result = []

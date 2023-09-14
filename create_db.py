@@ -1,6 +1,11 @@
+#!/usr/bin/env python3
+
 import sqlite3, os
 
 def creating_or_not_tables(dbfilename):
+    '''
+    Creating new database named 'exercisebase.db'
+    '''
     connection = sqlite3.connect(dbfilename)   
     data_for_new_table = '''create table switches (
                             hostname    text not null primary key,
