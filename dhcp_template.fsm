@@ -1,0 +1,7 @@
+Value MAC (([A-F0-9]+:){5}[A-F0-9]+)
+Value IP ((\d+.){3}\d+)
+Value VLAN (\d+)
+Value INTERFACE (\S+)
+
+Start
+  ^${MAC}\s+${IP}\s+\d+\s+dhcp-snooping\s+${VLAN}\s+${INTERFACE} -> Record
