@@ -24,14 +24,13 @@ def get_data_from_db(field, data, database_name):
         print("-" * table_width)
         print("Active devices:")
         print("-" * table_width)
-
         print (query + ' WHERE active = 1' + sub_query)
-
         get_data_from_table(query + ' WHERE active = 1' + sub_query, table_width)
 
         print("-" * table_width)
         print("NOT active devices:")
         print("-" * table_width)
+        print (query + ' WHERE active = 0' + sub_query)
         get_data_from_table(query + ' WHERE active = 0' + sub_query, table_width)
 
 
