@@ -1,0 +1,12 @@
+---
+
+- name: Run cfg commands on routers
+  hosts: 192.168.178.1
+  gather_facts: false
+  
+  tasks:
+
+    - name: Config password encryption
+      ios_config:
+        lines:
+          - "service password-encryption"
