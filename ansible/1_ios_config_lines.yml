@@ -9,4 +9,5 @@
     - name: Config password encryption
       ios_config:
         lines:
-          - "service password-encryption"
+          - service password-encryption
+          

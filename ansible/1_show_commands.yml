@@ -3,6 +3,7 @@
 - name: Run show commands on routers
   hosts: cisco_routers
   gather_facts: false
+  connection: local
 
   tasks:
 
