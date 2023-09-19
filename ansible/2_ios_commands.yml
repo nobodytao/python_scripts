@@ -1,0 +1,17 @@
+---
+
+- name: Run show commands on routers
+  hosts: cisco_routers
+  gather_facts: false
+
+  tasks:
+
+    - name: run show commands
+      ios_command:
+        commands:
+          - sh ip int br
+          - sh ip int br
+      register: show_result
+
+    - name: Debug registered var
+      debug: var=show_result.stdout_lines

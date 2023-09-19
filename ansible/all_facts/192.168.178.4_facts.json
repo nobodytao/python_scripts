@@ -1,0 +1,20 @@
+{
+    "changed": false,
+    "diff": {
+        "after": {
+            "path": "./all_facts/"
+        },
+        "before": {
+            "path": "./all_facts/"
+        }
+    },
+    "failed": false,
+    "gid": 1000,
+    "group": "nobodytao",
+    "mode": "0755",
+    "owner": "nobodytao",
+    "path": "./all_facts/",
+    "size": 4096,
+    "state": "directory",
+    "uid": 1000
+}

@@ -1,0 +1,17 @@
+---
+
+- name: Run show commands on routers
+  hosts: cisco_routers
+  gather_facts: false
+
+  tasks:
+
+    - name: run show commands
+      ios_command:
+        commands:
+          - sh ip int br
+          - sh ip int br
+        wait_for:
+         - result[0] contains '192.168.178.1'
+        retries:  2
+        interval: 12

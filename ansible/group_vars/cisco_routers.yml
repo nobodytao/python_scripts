@@ -1,0 +1,6 @@
+log_server: 192.168.178.1
+ntp_server: 192.168.178.15
+users:
+  user1: pass1
+  user2: pass2
+  user3: pass3
