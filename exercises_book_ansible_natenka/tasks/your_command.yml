@@ -1,0 +1,3 @@
+- name: Any command you choose
+  command: "{{ var_command }}"
+  register: output_var

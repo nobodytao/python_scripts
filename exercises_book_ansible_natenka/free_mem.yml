@@ -1,0 +1,36 @@
+#- name: Prepare environment
+#  hosts: 127.0.0.1  
+# 
+#  tasks:
+#  - name: Create directory 
+#    file:
+#     path: ./all_facts/
+#     state: directory
+#     mode: 0755
+
+- name: Run "free -m" command on Debians
+  hosts: workstations_debian
+
+  tasks:
+   - name: Run "free -m" command on one workstation
+     command: free -m
+     register: free_mem_result
+     notify: success
+
+   - name: Echo var
+     debug: var=free_mem_result.stdout
+
+   - name: When condition
+     debug:
+      msg: "Total memory 3969"
+     when: "'3969' in free_mem_result.stdout"
+
+  handlers:
+
+   - name: success
+     command: ls -a
+     register: ls_a_result
+     notify: output var
+
+   - name: output var
+     debug: var=ls_a_result.stdout_lines

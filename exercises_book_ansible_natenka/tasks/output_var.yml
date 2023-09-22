@@ -1,0 +1,2 @@
+- name: Output var
+  debug: var=output_var.stdout_lines

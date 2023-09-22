@@ -1,0 +1,13 @@
+- name: All tasks from files
+  hosts: workstations_debian
+  gather_facts: false
+
+  tasks:
+   - include_tasks: tasks/ls_a.yml
+   - include_tasks: tasks/output_var.yml
+   - include_tasks: tasks/ip_a.yml
+   - include_tasks: tasks/output_var.yml
+   - include_tasks: tasks/your_command.yml 
+     vars:
+      var_command: "whoami"
+   - include_tasks: tasks/output_var.yml

@@ -9,8 +9,8 @@
     - name: run show commands
       ios_command:
         commands:
-          - sh ip int br
-          - sh ip int br
+          - show ip int br
+          - sh ip route
       register: show_result
 
     - name: Debug registered var

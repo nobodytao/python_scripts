@@ -1,0 +1,4 @@
+commands:
+  - ip a
+  - ls -a
+  - whoami

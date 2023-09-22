@@ -1,0 +1,17 @@
+- name: Run commands from vars
+  hosts: workstations_debian
+  gather_facts: false
+
+  tasks:
+
+  - name: Include vars
+    include_vars: vars/commands_vars.yml
+
+  - name: Using commands
+    command: "{{ item }}"
+    register: output_var
+    with_items:
+    - "{{ commands }}" 
+
+  - name: Debug results
+    debug: var=output_var
