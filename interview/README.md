@@ -1,0 +1,1 @@
+interview.py (and interview.exe) randomly reads lines from the "interview_questions.txt" file in a pleasant voice. It functions seamlessly on the Windows operating system. However, on Linux, the voice may sound mechanical due to the use of pyttsx3. If the "interview_questions.txt" file is not found, the script suggests creating it manually.
