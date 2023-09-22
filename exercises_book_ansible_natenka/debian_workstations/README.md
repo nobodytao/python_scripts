@@ -1,7 +1,7 @@
-Role Name
+debian_workstations
 =========
 
-A brief description of the role goes here.
+Role created to manage virtual machines running Debian 12 operating systems
 
 Requirements
 ------------
