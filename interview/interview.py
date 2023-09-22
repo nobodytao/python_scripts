@@ -3,12 +3,12 @@
 import pyttsx3 
 from random import randrange 
 
+engine = pyttsx3.init()
+
 try:
     with open('interview_questions.txt','r') as interview_file:
 
             list_of_questions = interview_file.readlines()
-
-            engine = pyttsx3.init()
 
             while 1 > 0: 
                 random_question_index = randrange(len(list_of_questions))
@@ -19,3 +19,4 @@ try:
 
 except FileNotFoundError:
     print("Can't find 'interview_questions.txt'. Create it by yourself, pls. One line - one question.")
+    input('Press any key...')
