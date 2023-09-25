@@ -1,2 +1,8 @@
 ---
 # vars file for debian_workstations
+commands_for_debian:
+ - whoami
+ - ip a
+ - free -m
+html_path: ./ansible/reports/
+html_name: server_report.html

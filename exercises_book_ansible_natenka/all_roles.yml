@@ -1,0 +1,5 @@
+- name: Roles config
+  hosts: workstations_debian
+  gather_facts: false
+  roles:
+   - debian_workstations

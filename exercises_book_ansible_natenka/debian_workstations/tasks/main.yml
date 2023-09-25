@@ -1,2 +1,29 @@
 ---
 # tasks file for debian_workstations
+- name: Information about workstations - whoami, ip a, free -m
+  command: "{{ item }}"
+  register: output_var
+  with_items:
+  - "{{ commands_for_debian }}"
+  notify: Output var to the screen
+ 
+- name: Creating directory
+  file:
+   path: "{{ html_path }}"
+   state: directory
+   mode: 0755
+
+- name: Copying results in YAML format to remote PCs to txt-files
+  copy:
+   content: "{{ item.stdout_lines | to_nice_yaml }}"
+   dest: "{{ html_path }}yaml_report_{{ item.cmd }}_{{ inventory_hostname }}.txt"
+  with_items:
+  - "{{ output_var.results }}"
+
+- name: Copying files with HTML-report to PC   
+  template:
+   src: html_for_workstation.j2
+   dest: "{{ html_path }}{{ html_name }}"
+
+- name: Open HTML on user's PC with firefox
+  command: "systemd-run --user firefox {{ html_path }}{{ html_name }}"
