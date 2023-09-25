@@ -1,9 +1,7 @@
 <b>debian_workstations</b>
-
+<br>
 A simple task created while learning Ansible. It's made to control several virtual computers that use Debian 12.
-
-Here's what it does:
-
+<br>
 - On the computers, it runs some basic commands like "whoami," "ip -a," and "free -m."
 - The results of these commands are shown on the main computer screen using a special tool.
 - It also makes a new folder called "./ansible/reports/" on the computers.
@@ -12,3 +10,7 @@ Here's what it does:
 - There's also a file called "server-report.html" in that folder.
 - This file lists all the commands that were done on the computer and what happened when they ran.
 - Finally, it opens the "server-report.html" file on the user's computer using Firefox.
+<br>
+<b>single_files_and_playbooks</b>
+<br>
+Some tasks from the excellent Ansible book by Natenka (https://ansible-for-network-engineers.readthedocs.io/ru/latest/index.html). Tasks have been redesigned to connect and manage a fleet of virtual machines running the Debian 12 operating system.
